@@ -11,19 +11,41 @@ function createGrid(size) {
     square.style.width = `${squareSize}px`;
     square.style.height = `${squareSize}px`;
 
+    
+
     // Hovering effect on a square
     square.addEventListener('mouseenter', () => {
-      square.style.backgroundColor = 'green'; // basic hover color
+    let opacity = Number(square.dataset.opacity);
+
+    if (opacity < 1) {
+        opacity += 0.1;
+        square.dataset.opacity = opacity;
+    }
+
+    square.style.backgroundColor = 
+        `rgba(${square.dataset.r}, ${square.dataset.g}, ${square.dataset.b}, ${opacity})`;
     });
 
     container.appendChild(square);
+
+    // Generate random base color ONCE
+    const r = Math.floor(Math.random() * 256);
+    const g = Math.floor(Math.random() * 256);
+    const b = Math.floor(Math.random() * 256);
+
+    // Store color and opacity state
+    square.dataset.r = r;
+    square.dataset.g = g;
+    square.dataset.b = b;
+    square.dataset.opacity = 0;
   }
+
 }
 
 // Initialize default 16x16 grid webpage of square divs - by JS not HTML
 createGrid(16);
 
-// Button to reset grid
+// Button to reset grid and buttom clear grid 
 resetButton.addEventListener('click', () => {
   let newSize = prompt('Enter number of squares per side (max number 100):');
   newSize = parseInt(newSize);
@@ -34,4 +56,14 @@ resetButton.addEventListener('click', () => {
   }
 });
 
+const clearButton = document.getElementById('clearButton');
+
+clearButton.addEventListener('click', () => {
+  const squares = document.querySelectorAll('.gridSquare');
+
+  squares.forEach(square => {
+    square.style.backgroundColor = '';
+    square.dataset.opacity = 0;
+  });
+});
 
