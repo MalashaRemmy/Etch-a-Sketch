@@ -1,0 +1,21 @@
+/* style.css */
+
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px;
+}
+
+#gridContainer {
+  display: flex;
+  flex-wrap: wrap;
+  width: 960px; /* total width of grid */
+  border: 2px solid #333;
+}
+
+.gridSquare {
+  border: 1px solid #ddd; /* optional: for visible grid lines */
+  box-sizing: border-box; /* ensures borders don't break sizing */
+}
